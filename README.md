@@ -1,4 +1,4 @@
-# C3Rec — AI-Powered Learning Recommendation System
+# LearWise Inc — AI-Powered Learning Recommendation System
 
 A deep learning-based educational recommendation system that provides personalized course recommendations, question suggestions, and learning path generation based on student interaction history.
 
@@ -304,3 +304,4 @@ Scripts in `DataPrep/`:
 
 - `model/c3rec_model_v10_best.pt` - Trained weights
 - `model/c3rec_metadata_v10.pt` - Metadata and vocabularies
+
