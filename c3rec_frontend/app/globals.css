@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #0f172a;
+  --bg-elevated: #020617;
+  --card: #020617;
+  --card-soft: #020617;
+  --border-subtle: rgba(148, 163, 184, 0.3);
+  --text-main: #e5e7eb;
+  --text-muted: #9ca3af;
+  --brand: #3b82f6;
+  --brand-soft: rgba(59, 130, 246, 0.15);
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  background: radial-gradient(circle at top, #1e293b 0, #020617 55%, #000 100%);
+  color: var(--text-main);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+}
+
+.gradient-border {
+  position: relative;
+}
+
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(59, 130, 246, 0.7),
+    rgba(56, 189, 248, 0.6),
+    rgba(251, 191, 36, 0.6)
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.card-surface {
+  background: radial-gradient(circle at top left, #1e293b 0, #020617 55%);
+}
