@@ -1,10 +1,10 @@
-# LearnWise Inc - Powered Learning Recommendation System
+# C3Rec — AI-Powered Learning Recommendation System
 
 A deep learning-based educational recommendation system that provides personalized course recommendations, question suggestions, and learning path generation based on student interaction history.
 
 ## 🎯 Overview
 
-C3Rec is an intelligent educational platform that leverages transformer-based neural networks to:
+C3Rec leverages transformer-based neural networks to:
 - **Recommend next questions** based on student performance history
 - **Suggest relevant lessons** tailored to individual learning needs
 - **Generate personalized course paths** with autoregressive prediction
@@ -13,63 +13,42 @@ C3Rec is an intelligent educational platform that leverages transformer-based ne
 
 ## 🏗️ Architecture
 
-The project consists of three main components:
+The system consists of three main components:
 
-### 1. **Backend API** (`api/`)
-- **Framework**: FastAPI
-- **Model**: PyTorch-based Transformer Encoder (C3Rec v10)
-- **Endpoints**:
-  - `/recommend_questions` - Get top-k question recommendations
-  - `/recommend_lessons` - Get top-k lesson recommendations
-  - `/course_path` - Generate personalized learning path
-  - `/mastery_graph` - Compute concept mastery scores
-
-### 2. **Frontend Dashboard** (`c3rec_frontend/`)
-- **Framework**: Next.js 14 with React 18
-- **UI Libraries**: Tailwind CSS, Framer Motion, Recharts, ReactFlow
-- **Features**:
-  - Interactive dashboard with multiple visualization tabs
-  - Real-time API integration
-  - CSV-style input for student history
-  - Mastery radar charts and course path visualization
-
-### 3. **Model & Training** (`model/`, `Model training and validation/`)
-- **Architecture**: Transformer Encoder with multi-task learning
-- **Input Features**:
-  - Discrete: Question IDs, Concept IDs, Lecture IDs
-  - Continuous: Elapsed time, Timestamp, Correctness (0/1)
-- **Outputs**: Next question prediction, next lesson prediction, correctness probability, ability score
+1. **Backend API** (`api/`) - FastAPI server with PyTorch Transformer Encoder model (C3Rec v10)
+2. **Frontend Dashboard** (`c3rec_frontend/`) - Next.js 14 dashboard with interactive visualizations
+3. **Model & Training** (`model/`, `Model training and validation/`) - Transformer-based multi-task learning model
 
 ## 📁 Project Structure
 
 ```
-.
-├── api/                    # FastAPI backend server
-│   └── main.py            # API endpoints and model loading
-├── c3rec_frontend/        # Next.js frontend application
-│   ├── app/
-│   │   ├── page.tsx       # Main dashboard component
-│   │   ├── layout.tsx     # App layout
-│   │   └── globals.css    # Global styles
-│   └── package.json       # Frontend dependencies
-├── model/                 # Model architecture and loading
-│   ├── architecture.py    # C3RecModel definition
-│   ├── load_model.py      # Model loading utilities
-│   ├── c3rec_model_v10_best.pt      # Trained model weights
-│   └── c3rec_metadata_v10.pt        # Model metadata and vocabularies
-├── utils/                 # Inference utilities
-│   └── inference.py       # Recommendation and prediction functions
-├── DataPrep/              # Data preprocessing scripts
+c3rec_project/
+├── api/                           # FastAPI backend
+│   └── main.py                    # API endpoints and model loading
+├── model/                         # PyTorch model + metadata
+│   ├── architecture.py            # C3RecModel definition
+│   ├── load_model.py              # Model loading utilities
+│   ├── c3rec_model_v10_best.pt    # Trained model weights
+│   └── c3rec_metadata_v10.pt      # Metadata and vocabularies
+├── utils/                         # Inference utilities
+│   └── inference.py               # Recommendation and prediction functions
+├── DataPrep/                      # Data preprocessing scripts
 │   ├── Merge_Interactions.py
 │   ├── Merge_Content_Interactions.py
 │   └── Fix_timestamps_seq.py
 ├── Model training and validation/
-│   └── Main.py            # Training and validation script
-├── requirements.txt       # Python dependencies
-└── env/                   # Python virtual environment
+│   └── Main.py                    # Training and validation script
+├── c3rec_frontend/                 # Next.js dashboard UI
+│   ├── app/
+│   │   ├── page.tsx               # Main dashboard component
+│   │   ├── layout.tsx
+│   │   └── globals.css
+│   └── package.json
+├── requirements.txt               # Python dependencies
+└── README.md
 ```
 
-## 🚀 Installation & Environment Setup
+## 🚀 Installation & Setup
 
 ### Prerequisites
 
@@ -79,16 +58,12 @@ The project consists of three main components:
 
 ### Backend Installation (FastAPI + PyTorch)
 
-#### 1.1. Create and activate a virtual environment
+#### 1. Create and activate virtual environment
 
 ```bash
-# Navigate to project root
 cd c3rec_project
-
-# Create virtual environment
 python3 -m venv venv
 
-# Activate virtual environment
 # macOS / Linux:
 source venv/bin/activate
 
@@ -96,138 +71,92 @@ source venv/bin/activate
 venv\Scripts\activate
 ```
 
-#### 1.2. Install Python dependencies
+#### 2. Install Python dependencies
 
 ```bash
 pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-#### 1.3. Confirm that the model files exist
+#### 3. Verify model files
 
-Inside the folder `model/`, confirm the following files:
+Ensure these files exist in `model/`:
+- `c3rec_model_v10_best.pt`
+- `c3rec_metadata_v10.pt`
+- `load_model.py`
 
-```
-model/
-├── c3rec_model_v10_best.pt
-├── c3rec_metadata_v10.pt
-└── load_model.py
-```
+If files are located elsewhere, adjust paths in `api/main.py`.
 
-If your files are located elsewhere, adjust the paths inside `api/main.py`.
-
-#### 1.4. Run the FastAPI server
+#### 4. Start the FastAPI server
 
 ```bash
 uvicorn api.main:app --reload
 ```
 
-Your backend is now running on:
-
-**http://127.0.0.1:8000**
+Backend runs at: **http://127.0.0.1:8000**
 
 ### Frontend Installation (Next.js 14 + Tailwind)
 
-#### 2.1. Install Node.js (if not installed)
-
-Verify installation:
+#### 1. Verify Node.js installation
 
 ```bash
 node -v
 npm -v
 ```
 
-If missing, install Node.js LTS from: https://nodejs.org
+Install Node.js LTS from https://nodejs.org if needed.
 
-#### 2.2. Move to the frontend folder
+#### 2. Install dependencies
 
 ```bash
 cd c3rec_frontend
-```
-
-#### 2.3. Install dependencies
-
-```bash
 npm install
 ```
 
-This installs Next.js, TailwindCSS, Recharts, and all UI dependencies.
+#### 3. Configure API endpoint
 
-#### 2.4. Start the development server
-
-```bash
-npm run dev
-```
-
-The frontend runs at:
-
-**http://localhost:3000**
-
-### Connecting Frontend & Backend
-
-In the file `c3rec_frontend/app/page.tsx`, confirm this line points to your backend:
+In `c3rec_frontend/app/page.tsx`, verify:
 
 ```typescript
 const API_BASE = "http://127.0.0.1:8000";
 ```
 
-If the backend runs on another machine/server, update this value accordingly.
+Update if backend runs on a different host/port.
 
-### Recommended Project Structure
+#### 4. Start development server
 
-```
-c3rec_project/
-├── api/                    # FastAPI backend
-│   └── main.py
-├── model/                  # PyTorch model + metadata
-│   ├── c3rec_model_v10_best.pt
-│   ├── c3rec_metadata_v10.pt
-│   └── load_model.py
-├── utils/                  # Inference preprocessing & prediction logic
-│   └── inference.py
-├── training/               # Training scripts (optional)
-├── c3rec_frontend/         # Next.js dashboard UI
-│   ├── app/
-│   │   └── page.tsx
-│   └── package.json
-├── requirements.txt
-└── README.md
+```bash
+npm run dev
 ```
 
-### Starting Both Services
+Frontend runs at: **http://localhost:3000**
 
-Open **two terminals**:
+### Running Both Services
 
-**Terminal 1 → Backend**
-
+**Terminal 1 (Backend):**
 ```bash
 cd c3rec_project
 source venv/bin/activate  # or venv\Scripts\activate on Windows
 uvicorn api.main:app --reload
 ```
 
-**Terminal 2 → Frontend**
-
+**Terminal 2 (Frontend):**
 ```bash
 cd c3rec_project/c3rec_frontend
 npm run dev
 ```
 
-The system is now fully operational! 🎉
+## 📊 Model Architecture
 
-## 📊 Model Details
-
-### Architecture
-
-The C3Rec model uses a **Transformer Encoder** architecture with:
+The C3Rec model uses a **Transformer Encoder** with:
 
 - **Embeddings**: Question, Concept, and Lecture embeddings
 - **Continuous Features**: Projected elapsed time, timestamp, and correctness
 - **Positional Encoding**: Learned positional embeddings
 - **Multi-task Heads**:
-  - Correctness prediction head (sigmoid)
-  - Next question prediction head (linear)
-  - Next lesson prediction head (linear)
+  - Correctness prediction (sigmoid)
+  - Next question prediction (linear)
+  - Next lesson prediction (linear)
   - Ability score MLP (pooled over sequence)
 
 ### Model Configuration (v10)
@@ -239,8 +168,6 @@ The C3Rec model uses a **Transformer Encoder** architecture with:
 - `seq_len`: 200
 
 ### Input Format
-
-The API expects a JSON payload with the following structure:
 
 ```json
 {
@@ -256,13 +183,13 @@ The API expects a JSON payload with the following structure:
 }
 ```
 
-All arrays must have the same length and represent the student's interaction history in chronological order.
+All arrays must have equal length and represent chronological interaction history.
 
 ## 🔧 API Endpoints
 
 ### `POST /recommend_questions`
 
-Returns top-k recommended question IDs based on student history.
+Returns top-k recommended question IDs.
 
 **Response:**
 ```json
@@ -274,7 +201,7 @@ Returns top-k recommended question IDs based on student history.
 
 ### `POST /recommend_lessons`
 
-Returns top-k recommended lesson IDs based on student history.
+Returns top-k recommended lesson IDs.
 
 **Response:**
 ```json
@@ -286,7 +213,7 @@ Returns top-k recommended lesson IDs based on student history.
 
 ### `POST /course_path`
 
-Generates an autoregressive course path with predicted correctness probabilities.
+Generates autoregressive course path with predicted correctness probabilities.
 
 **Response:**
 ```json
@@ -299,15 +226,14 @@ Generates an autoregressive course path with predicted correctness probabilities
       "lecture": "L_15",
       "concept": "C_7",
       "predicted_correct_probability": 0.75
-    },
-    ...
+    }
   ]
 }
 ```
 
 ### `POST /mastery_graph`
 
-Computes mastery scores for each concept based on interaction history.
+Computes mastery scores for each concept.
 
 **Response:**
 ```json
@@ -318,73 +244,63 @@ Computes mastery scores for each concept based on interaction history.
       "concept": "C_5",
       "mastery": 0.85,
       "count": 5
-    },
-    ...
+    }
   ]
 }
 ```
 
 ## 🧪 Training the Model
 
-To train or retrain the C3Rec model:
-
 ```bash
 cd "Model training and validation"
 python Main.py
 ```
 
-The training script will:
-1. Load the preprocessed dataset
-2. Split into train/validation sets
-3. Train the model with multi-task loss
-4. Evaluate using NDCG@k metrics
-5. Save the best model checkpoint
+The training script:
+1. Loads preprocessed dataset
+2. Splits into train/validation sets
+3. Trains with multi-task loss
+4. Evaluates using NDCG@k metrics
+5. Saves best model checkpoint
 
-### Training Configuration
-
-Edit `CONFIG` in `Model training and validation/Main.py` to adjust:
-- Model architecture parameters
-- Training hyperparameters (learning rate, batch size, epochs)
-- Loss function weights
-- Evaluation metrics
+Edit `CONFIG` in `Model training and validation/Main.py` to adjust hyperparameters.
 
 ## 📝 Data Preprocessing
 
-The `DataPrep/` directory contains scripts for preprocessing educational interaction data:
-
-- **Merge_Interactions.py**: Merges multiple interaction CSV files
-- **Merge_Content_Interactions.py**: Merges content and interaction data
-- **Fix_timestamps_seq.py**: Fixes timestamp sequences in the dataset
+Scripts in `DataPrep/`:
+- `Merge_Interactions.py` - Merges multiple interaction CSV files
+- `Merge_Content_Interactions.py` - Merges content and interaction data
+- `Fix_timestamps_seq.py` - Fixes timestamp sequences
 
 ## 🛠️ Dependencies
 
-### Python Dependencies (`requirements.txt`)
-- `fastapi` - Web framework
-- `uvicorn[standard]` - ASGI server
+### Python (`requirements.txt`)
+- `fastapi`, `uvicorn[standard]` - Web framework and server
 - `torch` - Deep learning framework
-- `pandas` - Data manipulation
-- `numpy` - Numerical computing
+- `pandas`, `numpy` - Data manipulation
 - `pydantic` - Data validation
-- `scikit-learn` - Machine learning utilities
+- `scikit-learn` - ML utilities
 - `pyarrow` - Data serialization
 
-### Frontend Dependencies (`c3rec_frontend/package.json`)
-- `next` - React framework
-- `react` & `react-dom` - UI library
+### Frontend (`c3rec_frontend/package.json`)
+- `next`, `react`, `react-dom` - Framework and UI
 - `tailwindcss` - CSS framework
-- `recharts` - Charting library
-- `reactflow` - Graph visualization
+- `recharts`, `reactflow` - Visualizations
 - `framer-motion` - Animations
 - `axios` - HTTP client
 
 ## 📈 Features
 
-- ✅ **Personalized Recommendations**: AI-powered question and lesson suggestions
-- ✅ **Course Path Generation**: Autoregressive learning path prediction
-- ✅ **Mastery Tracking**: Concept-level mastery visualization
-- ✅ **Real-time Inference**: Fast API responses with GPU acceleration support
-- ✅ **Interactive Dashboard**: Modern, responsive web interface
-- ✅ **Multi-task Learning**: Joint prediction of correctness, questions, and lessons
+- ✅ Personalized AI-powered recommendations
+- ✅ Autoregressive course path generation
+- ✅ Concept-level mastery tracking
+- ✅ Real-time inference with GPU support
+- ✅ Interactive dashboard with visualizations
+- ✅ Multi-task learning architecture
 
+## 🔍 Model Version
 
+**Current:** v10
 
+- `model/c3rec_model_v10_best.pt` - Trained weights
+- `model/c3rec_metadata_v10.pt` - Metadata and vocabularies
