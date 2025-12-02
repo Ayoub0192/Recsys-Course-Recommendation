@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 CONFIG = {
     # Data
     "dataset_path": "c3rec_dataset_seq.pt",
-    "subset_ratio": 1,  # 0.01=1%, 0.1=10%, 0.5=50%, 1.0=full
+    "subset_ratio": 1,
     "train_split": 0.8,
     
     # Model architecture
@@ -62,10 +62,6 @@ print(f"✓ Total users: {len(data['user_ids'])}")
 print(f"✓ Sequence length: {data['seq_len']}")
 
 SEQ_LEN = data["seq_len"]
-
-# =============================
-# STEP 2 — Dataset & DataLoader
-# =============================
 
 # =============================
 # STEP 2 — Dataset & DataLoader
@@ -155,10 +151,10 @@ if subset_ratio < 1.0:
     subset_size = max(1, int(len(dataset_full) * subset_ratio))
     indices = torch.randperm(len(dataset_full))[:subset_size]
     dataset = Subset(dataset_full, indices)
-    print(f"⚠️  Using {subset_size}/{len(dataset_full)} samples (~{subset_ratio*100:.1f}%)")
+    print(f"Using {subset_size}/{len(dataset_full)} samples (~{subset_ratio*100:.1f}%)")
 else:
     dataset = dataset_full
-    print(f"✓ Using full dataset: {len(dataset)} samples")
+    print(f" Using full dataset: {len(dataset)} samples")
 
 # Split into train/val
 train_size = int(CONFIG["train_split"] * len(dataset))
@@ -319,7 +315,7 @@ class C3RecModel(nn.Module):
 
     def forward(self, batch):
         """
-        Forward pass with prefix-based prediction (no leakage).
+        Forward pass with prefix-based prediction.
         
         Given sequence [0, 1, 2, ..., T-1]:
         - Use prefix [0..T-2] as input
@@ -697,9 +693,7 @@ print("=" * 60)
 # =============================
 # STEP 6 — Evaluation: NDCG@K
 # =============================
-# =============================
-# STEP 6 — Evaluation: NDCG@K
-# =============================
+
 
 print("\n" + "=" * 60)
 print("EVALUATING: NDCG@K FOR NEXT-QUESTION PREDICTION")
