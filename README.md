@@ -386,23 +386,5 @@ The `DataPrep/` directory contains scripts for preprocessing educational interac
 - ✅ **Interactive Dashboard**: Modern, responsive web interface
 - ✅ **Multi-task Learning**: Joint prediction of correctness, questions, and lessons
 
-## 🔍 Model Version
 
-Current model version: **v10**
-
-Model files:
-- `model/c3rec_model_v10_best.pt` - Trained model weights
-- `model/c3rec_metadata_v10.pt` - Metadata, vocabularies, and normalization stats
-
-## 📄 License
-
-[Add your license information here]
-
-## 👥 Authors
-
-[Add author information here]
-
-## 🙏 Acknowledgments
-
-[Add acknowledgments if applicable]
 
