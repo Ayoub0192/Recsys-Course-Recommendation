@@ -61,7 +61,6 @@ c3rec_project/
 #### 1. Create and activate virtual environment
 
 ```bash
-cd c3rec_project
 python3 -m venv venv
 
 # macOS / Linux:
@@ -304,4 +303,5 @@ Scripts in `DataPrep/`:
 
 - `model/c3rec_model_v10_best.pt` - Trained weights
 - `model/c3rec_metadata_v10.pt` - Metadata and vocabularies
+
 
