@@ -48,12 +48,12 @@ export default function DashboardPage() {
   const [userId, setUserId] = useState<number>(123);
 
   // Text inputs (CSV style)
-  const [questionsCsv, setQuestionsCsv] = useState("101, 102, 103, 104, 105");
-  const [conceptsCsv, setConceptsCsv] = useState("5, 5, 5, 6, 6");
-  const [lecturesCsv, setLecturesCsv] = useState("10, 10, 11, 11, 12");
-  const [elapsedCsv, setElapsedCsv] = useState("30, 40, 35, 45, 50");
-  const [timeCsv, setTimeCsv] = useState("1000, 2000, 3000, 4000, 5000");
-  const [correctCsv, setCorrectCsv] = useState("1, 1, 0, 1, 1");
+  const [questionsCsv, setQuestionsCsv] = useState("101, 102, 103, 104, 105, 201, 202, 203, 204, 205, 301, 302, 303, 304, 305, 401, 402, 403, 404, 405");
+  const [conceptsCsv, setConceptsCsv] = useState("5, 5, 5, 6, 6, 7, 7, 7, 8, 8, 9, 9, 9, 10, 10, 11, 11, 11, 12, 12");
+  const [lecturesCsv, setLecturesCsv] = useState("10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16, 17, 17, 18, 18, 19, 19");
+  const [elapsedCsv, setElapsedCsv] = useState("30, 40, 35, 45, 50, 55, 60, 62, 58, 70, 75, 80, 77, 85, 90, 95, 92, 100, 110, 120");
+  const [timeCsv, setTimeCsv] = useState("1000, 2000, 3000, 4000, 5000, 6000, 7200, 8300, 9400, 10500, 11600, 13000, 14200, 15400, 16800, 18000, 19500, 21000, 22500, 24000");
+  const [correctCsv, setCorrectCsv] = useState("1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1");
 
   const [topK, setTopK] = useState(5);
   const [steps, setSteps] = useState(6);
